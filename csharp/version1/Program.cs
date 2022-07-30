@@ -1,4 +1,18 @@
 ﻿public static class BlackJack {
+
+    private static Random rng = new Random();  
+
+    public static void Shuffle<T>(this IList<T> list)  
+    {  
+        int n = list.Count;  
+        while (n > 1) {  
+            n--;  
+            int k = rng.Next(n + 1);  
+            T value = list[k];  
+            list[k] = list[n];  
+            list[n] = value;  
+        }  
+    }
     private static List<string> suits = new List<string>(){"S","D","C","H"};
     private static List<string> values = new List<string>(){"A","1","2","3","4","5","6","7","8","9","J","Q","K"};
 
@@ -9,8 +23,7 @@
     }
 
     public static void ShuffleDeck(in List<string> card_deck) {
-        var r = new Random();
-        card_deck.Sort((_,_)=>r.Next(2)-1);
+        card_deck.Shuffle<String>();
     }
 
     public static void DealCards(in List<string> my_deck) {
@@ -26,8 +39,12 @@
 public class Program {
     public static void Main() {
         Console.WriteLine("Generating a new deck.");
-        var card_deck = BlackJack.NewDeck();
-        BlackJack.ShuffleDeck(card_deck);
-        BlackJack.DealCards(card_deck);
+        for(int x = 0; x < 100; x++) {
+            var card_deck = BlackJack.NewDeck();
+            for(int i = 0; i < 26; i++) {
+                BlackJack.ShuffleDeck(card_deck);
+                BlackJack.DealCards(card_deck);
+            }
+        }
     }
 }

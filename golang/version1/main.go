@@ -9,9 +9,14 @@ import (
 
 func main() {
 	fmt.Println("Generating a new deck.")
-	card_deck := new_deck()
-	shuffle_deck(&card_deck)
-	deal_cards(&card_deck)
+	for x := 0; x < 100; x++ {
+		card_deck := new_deck()
+		for i := 0; i < 26; i++ {
+			shuffle_deck(&card_deck)
+			deal_cards(&card_deck)
+		}
+	}
+
 }
 
 func new_deck() []string {
@@ -33,5 +38,5 @@ func deal_cards(my_deck *[]string) {
 	choice_one := (*my_deck)[0]
 	choice_two := (*my_deck)[1]
 	*my_deck = (*my_deck)[2:]
-	fmt.Printf("%s, %s, %d", choice_one, choice_two, len(*my_deck))
+	fmt.Printf("%s, %s, %d\n", choice_one, choice_two, len(*my_deck))
 }

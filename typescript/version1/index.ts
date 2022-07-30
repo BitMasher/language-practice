@@ -1,8 +1,12 @@
 function main(): void {
     console.log('Generating a new deck.');
-    const card_deck: string[] = new_deck();
-    shuffle_deck(card_deck);
-    deal_cards(card_deck);
+    for(let x: number = 0; x < 100; x++) {
+        const card_deck: string[] = new_deck();
+        for(let i: number = 0; i < 26; i++) {
+            shuffle_deck(card_deck);
+            deal_cards(card_deck);
+        }
+    }
 }
 
 function new_deck(): string[] {

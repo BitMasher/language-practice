@@ -25,21 +25,17 @@ int shuffle_compar(const void* p1, const void* p2) {
 }
 
 void shuffle_deck(char ** card_deck) {
-    srand(time(NULL));
+    srand(time(NULL) + rand());
     qsort(card_deck, 52, sizeof(const char *), shuffle_compar);
 }
 
 char ** deal_cards(char ** my_deck) {
     char* choice_one = my_deck[0];
     char* choice_two = my_deck[1];
+    my_deck = my_deck+2;
     deck_size = deck_size-2;
-    char**new_deck = malloc(deck_size * sizeof(char*));
-    for(int i = 2; i < deck_size+2; i++) {
-        new_deck[i-2] = malloc(3*sizeof(char));
-        new_deck[i-2] = my_deck[i];
-    }
     printf("%s, %s, %d\n", choice_one, choice_two, deck_size);
-    return new_deck;
+    return my_deck;
 }
 
 int main() {

@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
     The Goal of this program is to generate a deck of cards.
     Ideally it will do so in "New Deck Format"
@@ -11,12 +12,11 @@ import random
 def main():
     """ Let's use this function for control flow, input and outputs"""
     print(f"Generating a new deck.")
-    card_deck = new_deck()
-    #print(f'{card_deck}')  #This will be new deck order.
-
-    shuffle_deck(card_deck)
-    #print(f'{card_deck}')  #This will be shuffled.
-    deal_cards(card_deck)
+    for x in range(100):
+        card_deck = new_deck()
+        for i in range(26):
+            shuffle_deck(card_deck)
+            card_deck = deal_cards(card_deck)
 
 
 def new_deck():
@@ -40,7 +40,7 @@ def shuffle_deck(card_deck):
         This function should take the deck in whatever order it is
         and shuffle it.
     """
-    shuffled_deck = random.shuffle(card_deck)
+    random.shuffle(card_deck)
     
 
 def deal_cards(my_deck):
@@ -49,11 +49,11 @@ def deal_cards(my_deck):
         of cards to each player.  Which means we should also accept a
         number of players as an input as well.
     """
-    choice_one = random.choice(my_deck)
-    my_deck.remove(choice_one)
-    choice_two = random.choice(my_deck)
-    my_deck.remove(choice_two)
+    choice_one = my_deck[0]
+    choice_two = my_deck[1]
+    my_deck = my_deck[2:]
     print(f'{choice_one}, {choice_two}, {len(my_deck)}')
+    return my_deck
 
 
 

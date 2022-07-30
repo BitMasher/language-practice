@@ -4,9 +4,15 @@ Module Program
     Sub Main(args As String())
         Console.WriteLine("Generating a new deck.")
         Dim card_deck As List(Of String)
-        card_deck = NewDeck()
-        ShuffleDeck(card_deck)
-        DealCards(card_deck)
+        Dim x As Integer = 0
+        Dim i As Integer = 0
+        For x = 0 to 99
+            card_deck = NewDeck()
+            For i = 0 to 25
+                ShuffleDeck(card_deck)
+                DealCards(card_deck)
+            Next
+        Next
     End Sub
 
     Function NewDeck() As List(Of String)
@@ -23,7 +29,14 @@ Module Program
 
     Sub ShuffleDeck(ByRef card_deck As List(Of String))
         Dim r As New Random()
-        card_deck.Sort(Function(a,b) r.Next(2)-1)
+        Dim n As Integer = card_deck.Count
+        While n > 1
+            n = n-1
+            Dim k As Integer = r.Next(n + 1)
+            Dim value As String = card_deck(k)
+            card_deck(k) = card_deck(n)
+            card_deck(n) = value
+        End While
     End Sub
 
     Sub DealCards(ByRef my_deck As List(Of String))
